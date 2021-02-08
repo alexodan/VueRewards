@@ -1,10 +1,12 @@
 <template>
   <div id="app">
-    <header>
-      <div class="balance">
-        Balance:
-        <span>{{ balance }}</span>
-      </div>
+    <div class="balance">
+      Balance:
+      <span>{{ balance }}</span>
+    </div>
+    <header class="header">
+      <div class="title">Electronics</div>
+      <div class="overlay"></div>
     </header>
     <span class="product-grid">
       <product-card
@@ -52,7 +54,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 * {
   margin: 0;
   padding: 0;
@@ -64,6 +66,30 @@ export default {
   max-width: 1600px;
   margin: 20px auto;
   position: relative;
+}
+.header {
+  background-image: url("~@/images/header.png");
+  background-size: cover;
+  background-position-y: center;
+  background-position-x: right;
+  height: 300px;
+  position: relative;
+  width: 100%;
+  .title {
+    position: absolute;
+    bottom: 15px;
+    color: white;
+    font-size: 2.5rem;
+    font-weight: bold;
+    left: 15px;
+    z-index: 1;
+  }
+  .overlay {
+    background-color: rgb(62, 163, 62);
+    height: 100%;
+    width: 100%;
+    opacity: 0.7;
+  }
 }
 .balance {
   position: absolute;
