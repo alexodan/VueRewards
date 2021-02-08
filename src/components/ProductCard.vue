@@ -1,20 +1,16 @@
 <template>
-  <div
-    class="card"
-    @mouseenter="isHovered = true"
-    @mouseleave="isHovered = false"
-  >
+  <div class="card" @click="toggleReverse">
     <div>
       <img :src="product.image" :alt="product.name" />
     </div>
     <h3>{{ product.name }}</h3>
     <span>{{ product.price }}</span>
-    <button @click="redeem">Redeem</button>
-    <div class="reverse-card" v-if="isHovered">
+    <div class="reverse-card" v-if="isVisible">
       <div class="content">
         <p>{{ balance }}</p>
         <p>-{{ product.price }}</p>
         <p class="total">{{ balance - product.price }}</p>
+        <button @click="redeem">Redeem Now</button>
       </div>
     </div>
   </div>
@@ -24,7 +20,7 @@
 export default {
   data() {
     return {
-      isHovered: null,
+      isVisible: null,
     };
   },
   mounted() {
@@ -32,8 +28,12 @@ export default {
   },
   props: ["product", "balance"],
   methods: {
-    redeem() {
+    redeem(evt) {
+      evt.stopPropagation();
       this.$emit("redeem", this.product);
+    },
+    toggleReverse() {
+      this.isVisible = !this.isVisible;
     },
   },
 };
@@ -42,16 +42,21 @@ export default {
 <style lang="scss" scoped>
 .card {
   align-items: center;
-  border: 1px solid black;
+  background-color: white;
+  /* -webkit-box-shadow: 0px 0px 1px 1px rgba(230, 230, 230, 1);
+  -moz-box-shadow: 0px 0px 1px 1px rgb(230, 230, 230);
+  box-shadow: 0px 0px 1px 1px rgba(230, 230, 230, 1); */
+  cursor: pointer;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   min-width: 200px;
   min-height: 200px;
   position: relative;
-  button {
-    background-color: rgb(37, 157, 37);
-    color: white;
+  &:hover {
+    border: 1px solid rgb(37, 157, 37);
+    transform: scale(1.01);
+    transition: 0.5s ease-out;
   }
 }
 .reverse-card {
@@ -60,7 +65,7 @@ export default {
   font-size: 1.6rem;
   height: calc(100% + 20px);
   left: -10px;
-  opacity: 0.8;
+  opacity: 0.95;
   position: absolute;
   top: -10px;
   width: calc(100% + 20px);
@@ -71,6 +76,14 @@ export default {
     text-align: right;
     transform: translate(-50%, -50%);
     top: 50%;
+  }
+  .content button {
+    background-color: white;
+    border: none;
+    border-radius: 5px;
+    color: rgb(37, 157, 37);
+    cursor: pointer;
+    padding: 5px;
   }
   .total {
     border-top: 2px solid white;

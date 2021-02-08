@@ -76,6 +76,8 @@ export default {
   box-sizing: border-box;
   font-family: "Courier New", Courier, monospace;
 }
+body {
+}
 .balance {
   position: absolute;
   top: 10px;
@@ -84,6 +86,7 @@ export default {
   color: white;
 }
 .product-grid {
+  background-color: #f8f8f8;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 20px;
