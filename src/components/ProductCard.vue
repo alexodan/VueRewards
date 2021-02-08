@@ -4,12 +4,12 @@
       <img :src="product.image" :alt="product.name" />
     </div>
     <h3>{{ product.name }}</h3>
-    <span>{{ product.price }}</span>
+    <span>{{ product.cost }}</span>
     <div class="reverse-card" v-if="isVisible">
       <div class="content">
         <p>{{ balance }}</p>
-        <p>-{{ product.price }}</p>
-        <p class="total">{{ balance - product.price }}</p>
+        <p>-{{ product.cost }}</p>
+        <p class="total">{{ balance - product.cost }}</p>
         <button @click="redeem">Redeem Now</button>
       </div>
     </div>

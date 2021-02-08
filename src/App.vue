@@ -10,6 +10,8 @@
     </div>
     <span class="product-grid">
       <product-card
+        :key="product._id"
+        v-for="product in products"
         :product="product"
         :balance="balance"
         @redeem="redeemProduct"
@@ -22,6 +24,7 @@
 <script>
 import ProductCard from "./components/ProductCard.vue";
 import Game from "./components/Game.vue";
+import { getProducts } from "./api/mocks";
 
 export default {
   name: "App",
@@ -29,17 +32,13 @@ export default {
     ProductCard,
     Game,
   },
+  mounted() {
+    getProducts().then((products) => (this.products = products));
+  },
   data() {
     return {
-      // count: 0,
-      // step: 1,
       balance: 1000,
-      product: {
-        name: "IPhone 12",
-        price: 100,
-        image:
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpbnHrFRXb-04gwwCBKxishZ1Ec4gIrOgnxA&usqp=CAU",
-      },
+      products: [],
     };
   },
   watch: {
