@@ -80,10 +80,14 @@ export default {
   .content button {
     background-color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 25px;
     color: rgb(37, 157, 37);
     cursor: pointer;
-    padding: 5px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    padding: 10px;
+    text-transform: uppercase;
+    width: 150px;
   }
   .total {
     border-top: 2px solid white;
