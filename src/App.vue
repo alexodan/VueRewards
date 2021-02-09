@@ -1,9 +1,6 @@
 <template>
   <div id="app">
-    <div class="balance">
-      Balance:
-      <span>{{ balance }}</span>
-    </div>
+    <top-bar :balance="balance"></top-bar>
     <header class="header">
       <div class="title">Electronics</div>
       <div class="overlay"></div>
@@ -22,12 +19,14 @@
 
 <script>
 import ProductCard from "./components/ProductCard.vue";
+import TopBar from "./components/TopBar.vue";
 import { getProducts } from "./api";
 
 export default {
   name: "App",
   components: {
     ProductCard,
+    TopBar,
   },
   mounted() {
     getProducts().then((products) => (this.products = products));
@@ -54,7 +53,7 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 * {
   margin: 0;
   padding: 0;
@@ -62,9 +61,13 @@ export default {
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
+body {
+  padding: 25px;
+}
 #app {
+  -webkit-box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.1);
   max-width: 1600px;
-  margin: 20px auto;
   position: relative;
 }
 .header {
@@ -90,13 +93,6 @@ export default {
     width: 100%;
     opacity: 0.7;
   }
-}
-.balance {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background-color: orangered;
-  color: white;
 }
 .product-grid {
   background-color: #f8f8f8;

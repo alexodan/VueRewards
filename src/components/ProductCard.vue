@@ -74,6 +74,10 @@ export default {
     height: 100%;
     justify-content: space-between;
   }
+  .content .total {
+    margin-top: 5px;
+    padding-top: 5px;
+  }
   .content .image {
     width: 100%;
     height: 180px;
