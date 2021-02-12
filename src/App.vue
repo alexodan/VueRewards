@@ -7,11 +7,12 @@
     </header>
     <span class="product-grid">
       <product-card
-        :key="product._id"
         v-for="product in products"
+        :key="product._id"
         :product="product"
         :balance="balance"
         @redeem="redeemProduct"
+        @select="productSelected"
       ></product-card>
     </span>
   </div>
@@ -34,6 +35,7 @@ export default {
   data() {
     return {
       balance: 1000,
+      idSelected: null,
       products: [],
     };
   },
@@ -43,6 +45,11 @@ export default {
     },
   },
   methods: {
+    productSelected(id) {
+      this.products.forEach(
+        (p) => (p.isSelected = p.id !== id ? false : !p.isSelected)
+      );
+    },
     redeemProduct(product) {
       // fetch api with product
       if (this.balance > this.balance - product.price) {

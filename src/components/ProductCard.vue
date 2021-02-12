@@ -1,12 +1,12 @@
 <template>
-  <div class="card" @click="toggleReverse">
+  <div class="card" @click="productSelected">
     <div class="content">
       <img class="image" :src="product.image" :alt="product.title" />
       <hr class="separator" />
       <h4 v-trim>{{ product.title }}</h4>
       <span class="price">{{ product.price }} 💰</span>
     </div>
-    <div class="reverse-card" v-if="isVisible">
+    <div class="reverse-card" v-if="product.isSelected">
       <div class="content">
         <p>{{ balance }}</p>
         <p>-{{ product.price }}</p>
@@ -19,14 +19,7 @@
 
 <script>
 export default {
-  data() {
-    return {
-      isVisible: null,
-    };
-  },
-  mounted() {
-    console.log("product:", this.product);
-  },
+  // data() {},
   directives: {
     trim: {
       mounted(el, binding, vnode) {
@@ -39,12 +32,12 @@ export default {
   },
   props: ["product", "balance"],
   methods: {
+    productSelected() {
+      this.$emit("select", this.product.id);
+    },
     redeem(evt) {
       evt.stopPropagation();
       this.$emit("redeem", this.product);
-    },
-    toggleReverse() {
-      this.isVisible = !this.isVisible;
     },
   },
 };
@@ -125,6 +118,7 @@ export default {
     font-weight: bold;
     font-size: 1.1rem;
     margin-top: 20px;
+    outline: none;
     padding: 10px;
     text-transform: uppercase;
     width: 150px;
