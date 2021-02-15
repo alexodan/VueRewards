@@ -1,21 +1,19 @@
 <template>
-  <div id="app">
-    <top-bar :balance="balance"></top-bar>
-    <header class="header">
-      <div class="title">Electronics</div>
-      <div class="overlay"></div>
-    </header>
-    <span class="product-grid">
-      <product-card
-        v-for="product in products"
-        :key="product._id"
-        :product="product"
-        :balance="balance"
-        @redeem="redeemProduct"
-        @select="productSelected"
-      ></product-card>
-    </span>
-  </div>
+  <top-bar :balance="balance"></top-bar>
+  <header class="header">
+    <div class="title">Electronics</div>
+    <div class="overlay"></div>
+  </header>
+  <span class="product-grid">
+    <product-card
+      v-for="product in products"
+      :key="product._id"
+      :product="product"
+      :balance="balance"
+      @redeem="redeemProduct"
+      @select="productSelected"
+    ></product-card>
+  </span>
 </template>
 
 <script>
@@ -70,12 +68,6 @@ export default {
 }
 body {
   padding: 25px;
-}
-#app {
-  -webkit-box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.1);
-  box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.1);
-  max-width: 1600px;
-  position: relative;
 }
 .header {
   background-image: url("~@/images/header.png");
